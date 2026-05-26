@@ -30,6 +30,8 @@ export type Checkin = {
 // Estágio visual da planta
 export type Estagio = {
   emoji: string;
+  arte: string; // caminho pra ilustração SVG/PNG em public/plantas/ (com fallback pro emoji)
+  id: "semente" | "brotinho" | "mudinha" | "vaso-pequeno" | "vaso-medio" | "crescida" | "majestosa";
   nome: string;
-  proximoEm: number | null; // dias até o próximo estágio (null se já é o último)
+  proximoEm: number | null;
 };

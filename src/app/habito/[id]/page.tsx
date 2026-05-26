@@ -73,6 +73,8 @@ export default async function DetalheHabitoPage({ params }: PageProps) {
       {/* Planta grande animada */}
       <PlantaGrande
         emoji={estagio.emoji}
+        arte={estagio.arte}
+        estagioId={estagio.id}
         progresso={progresso}
         nome={estagio.nome}
         proximoEm={estagio.proximoEm}

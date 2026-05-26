@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { regar } from "@/app/jardim/actions";
 import { ConfeteRegar } from "@/components/confete-regar";
+import { EstagioPlanta } from "@/components/estagio-planta";
 import type { Habito, Estagio } from "@/lib/types";
 
 type Props = {
@@ -71,13 +72,18 @@ export function CardHabito({
 
         <div className="flex items-center gap-3 mb-3">
           <motion.div
-            key={estagio.emoji}
+            key={estagio.id}
             initial={{ scale: 0.8 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 200, damping: 12 }}
-            className="text-2xl relative"
+            className="relative"
           >
-            {estagio.emoji}
+            <EstagioPlanta
+              arte={estagio.arte}
+              emoji={estagio.emoji}
+              tamanho={32}
+              alt={estagio.nome}
+            />
             <AnimatePresence>
               {mostrarConfete && <ConfeteRegar />}
             </AnimatePresence>
