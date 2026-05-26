@@ -1,17 +1,13 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import { sair } from "../login/actions";
-import { Button } from "@/components/ui/button";
 import { calcularStreakAtual, regouHoje } from "@/lib/streak";
 import { estagioPorStreak, progressoNoEstagio } from "@/lib/plantas";
 import { CardHabito } from "@/components/card-habito";
+import { NavInferior } from "@/components/nav-inferior";
 import type { Habito, Checkin } from "@/lib/types";
 
 export default async function JardimPage() {
   const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
 
   // Busca hábitos do usuário (não arquivados)
   const { data: habitos } = await supabase
@@ -102,15 +98,8 @@ export default async function JardimPage() {
         </>
       )}
 
-      <form action={sair} className="mt-auto pt-12">
-        <Button
-          type="submit"
-          variant="ghost"
-          className="w-full text-stone-500 hover:text-costela text-sm"
-        >
-          sair · {user?.email}
-        </Button>
-      </form>
+      <div className="mt-auto" />
+      <NavInferior ativa="jardim" />
     </main>
   );
 }
