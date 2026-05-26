@@ -6,6 +6,7 @@ import {
   type ContextoUsuario,
 } from "@/lib/conquistas";
 import { NavInferior } from "@/components/nav-inferior";
+import { BadgeGrid } from "@/components/badge-grid";
 import type { Habito, Checkin } from "@/lib/types";
 
 export default async function ConquistasPage() {
@@ -61,17 +62,16 @@ export default async function ConquistasPage() {
           ainda nenhuma. plantando você desbloqueia! 🌱
         </p>
       ) : (
-        <div className="grid grid-cols-3 gap-2 mb-6">
-          {destrancadas.map((c) => (
-            <div
-              key={c.id}
-              className="bg-offwhite rounded-2xl p-3 text-center border border-brote/40"
-            >
-              <div className="text-3xl mb-1">{c.emoji}</div>
-              <div className="text-xs font-medium leading-tight">{c.nome}</div>
-              <div className="text-xs text-stone-500 mt-1">{c.requisito}</div>
-            </div>
-          ))}
+        <div className="mb-6">
+          <BadgeGrid
+            items={destrancadas.map((c) => ({
+              id: c.id,
+              emoji: c.emoji,
+              nome: c.nome,
+              rotulo: c.requisito,
+              desbloqueada: true,
+            }))}
+          />
         </div>
       )}
 
@@ -81,17 +81,16 @@ export default async function ConquistasPage() {
           <p className="text-xs uppercase tracking-wider font-medium mb-3 text-stone-500">
             🔒 a destrancar ({aDestrancar.length})
           </p>
-          <div className="grid grid-cols-3 gap-2 mb-6">
-            {aDestrancar.map((c) => (
-              <div
-                key={c.id}
-                className="bg-stone-100 rounded-2xl p-3 text-center grayscale opacity-50"
-              >
-                <div className="text-3xl mb-1">{c.emoji}</div>
-                <div className="text-xs font-medium leading-tight">{c.nome}</div>
-                <div className="text-xs text-stone-500 mt-1">{c.requisito}</div>
-              </div>
-            ))}
+          <div className="mb-6">
+            <BadgeGrid
+              items={aDestrancar.map((c) => ({
+                id: c.id,
+                emoji: c.emoji,
+                nome: c.nome,
+                rotulo: c.requisito,
+                desbloqueada: false,
+              }))}
+            />
           </div>
         </>
       )}
@@ -103,27 +102,26 @@ export default async function ConquistasPage() {
         🌿 sua coleção ({especiesTem.length}/{especies.length})
       </p>
 
-      <div className="grid grid-cols-3 gap-2 mb-3">
-        {especiesTem.map((e) => (
-          <div
-            key={e.id}
-            className="bg-offwhite rounded-2xl p-3 text-center border border-brote/40"
-          >
-            <div className="text-3xl mb-1">{e.emoji}</div>
-            <div className="text-xs font-medium leading-tight">{e.nome}</div>
-            <div className="text-xs text-stone-500 mt-1">tem</div>
-          </div>
-        ))}
-        {especiesFaltam.map((e) => (
-          <div
-            key={e.id}
-            className="bg-stone-100 rounded-2xl p-3 text-center grayscale opacity-50"
-          >
-            <div className="text-3xl mb-1">🔒</div>
-            <div className="text-xs font-medium leading-tight">{e.nome}</div>
-            <div className="text-xs text-stone-500 mt-1">{e.desbloqueio}</div>
-          </div>
-        ))}
+      <div className="mb-3">
+        <BadgeGrid
+          comCadeado
+          items={[
+            ...especiesTem.map((e) => ({
+              id: e.id,
+              emoji: e.emoji,
+              nome: e.nome,
+              rotulo: "tem",
+              desbloqueada: true,
+            })),
+            ...especiesFaltam.map((e) => ({
+              id: e.id,
+              emoji: e.emoji,
+              nome: e.nome,
+              rotulo: e.desbloqueio,
+              desbloqueada: false,
+            })),
+          ]}
+        />
       </div>
 
       {especiesFaltam.length > 0 && (

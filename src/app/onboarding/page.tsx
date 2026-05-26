@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -83,18 +84,31 @@ export default function OnboardingPage() {
       {/* Progresso */}
       <div className="flex justify-center gap-2 mb-10 mt-3">
         {[1, 2, 3, 4].map((p) => (
-          <div
+          <motion.div
             key={p}
-            className={`w-8 h-1.5 rounded-full transition-colors ${
-              p <= passo ? "bg-costela" : "bg-stone-200"
-            }`}
+            initial={false}
+            animate={{
+              backgroundColor: p <= passo ? "#2D5F3F" : "#E7E5E4",
+              scale: p === passo ? 1.15 : 1,
+            }}
+            transition={{ duration: 0.3 }}
+            className="w-8 h-1.5 rounded-full"
           />
         ))}
       </div>
 
+      <AnimatePresence mode="wait">
+
       {/* Passo 1: Boas-vindas */}
       {passo === 1 && (
-        <div className="text-center flex-1 flex flex-col">
+        <motion.div
+          key="passo1"
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 30 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          className="text-center flex-1 flex flex-col"
+        >
           <h1 className="font-serif text-4xl text-costela mb-6">
             oi! eu sou a Mudinha. 🌿
           </h1>
@@ -118,12 +132,18 @@ export default function OnboardingPage() {
           >
             pular
           </button>
-        </div>
+        </motion.div>
       )}
 
       {/* Passo 2: Escolher hábito */}
       {passo === 2 && (
-        <div>
+        <motion.div
+          key="passo2"
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -30 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+        >
           <h2 className="font-serif text-2xl text-costela mb-8 text-center">
             qual hábito você quer começar a regar?
           </h2>
@@ -177,12 +197,18 @@ export default function OnboardingPage() {
           >
             voltar
           </button>
-        </div>
+        </motion.div>
       )}
 
       {/* Passo 3: Frequência + lembrete */}
       {passo === 3 && (
-        <div>
+        <motion.div
+          key="passo3"
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -30 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+        >
           <h2 className="font-serif text-2xl text-costela mb-2 text-center">
             {icone} {nome}
           </h2>
@@ -265,12 +291,19 @@ export default function OnboardingPage() {
           >
             voltar
           </button>
-        </div>
+        </motion.div>
       )}
 
       {/* Passo 4: Sucesso */}
       {passo === 4 && (
-        <div className="text-center flex-1 flex flex-col">
+        <motion.div
+          key="passo4"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5, type: "spring", stiffness: 200, damping: 18 }}
+          className="text-center flex-1 flex flex-col"
+        >
           <h1 className="font-serif text-5xl text-costela mb-6">plantado! 🌱</h1>
           <p className="text-stone-700 mb-2 text-lg">
             sua primeira mudinha tá no seu jardim.
@@ -289,8 +322,10 @@ export default function OnboardingPage() {
           >
             ver meu jardim
           </Button>
-        </div>
+        </motion.div>
       )}
+
+      </AnimatePresence>
     </main>
   );
 }
