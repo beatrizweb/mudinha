@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { MascoteFolha } from "@/components/mascote-folha";
 import { criarHabitoNoOnboarding } from "./actions";
 
 const HABITOS_SUGERIDOS = [
@@ -312,8 +313,8 @@ export default function OnboardingPage() {
             volta aqui amanhã pra regar. eu te lembro.
           </p>
 
-          <div className="bg-brote/20 rounded-3xl p-16 mb-12 text-7xl flex-1 flex items-center justify-center">
-            🌱💧
+          <div className="bg-brote/20 rounded-3xl p-12 mb-12 flex-1 flex items-center justify-center">
+            <MascoteFolha tamanho={180} expressao="feliz" />
           </div>
 
           <Button

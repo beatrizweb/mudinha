@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { sair } from "../login/actions";
 import { Button } from "@/components/ui/button";
 import { NavInferior } from "@/components/nav-inferior";
+import { MascoteFolha } from "@/components/mascote-folha";
 import { calcularMaiorStreak } from "@/lib/streak";
 import {
   verificarConquistas,
@@ -59,8 +60,8 @@ export default async function PerfilPage() {
 
       {/* Avatar + info */}
       <div className="text-center mb-8">
-        <div className="bg-brote/20 w-24 h-24 rounded-full flex items-center justify-center text-5xl mx-auto mb-3">
-          🌿
+        <div className="bg-brote/20 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-3 overflow-hidden">
+          <MascoteFolha tamanho={80} expressao="feliz" />
         </div>
         <h2 className="font-serif text-2xl text-costela">{user?.email?.split("@")[0]}</h2>
         <p className="text-sm text-stone-600 mb-1">{user?.email}</p>

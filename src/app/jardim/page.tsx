@@ -4,6 +4,7 @@ import { calcularStreakAtual, regouHoje } from "@/lib/streak";
 import { estagioPorStreak, progressoNoEstagio } from "@/lib/plantas";
 import { CardHabito } from "@/components/card-habito";
 import { NavInferior } from "@/components/nav-inferior";
+import { MascoteFolha } from "@/components/mascote-folha";
 import type { Habito, Checkin } from "@/lib/types";
 
 export default async function JardimPage() {
@@ -108,7 +109,9 @@ export default async function JardimPage() {
 function EmptyState() {
   return (
     <div className="bg-offwhite rounded-2xl p-8 border border-stone-200 text-center">
-      <div className="text-6xl mb-4">🌱</div>
+      <div className="flex justify-center mb-4">
+        <MascoteFolha tamanho={120} expressao="atenta" />
+      </div>
       <h2 className="font-serif text-xl text-costela mb-2">
         seu jardim tá vazio
       </h2>
