@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { editarHabito } from "@/app/habito/[id]/editar/actions";
+import { SeletorEspecie } from "@/components/seletor-especie";
 import type { Habito } from "@/lib/types";
 
 const ICONES = [
@@ -13,7 +14,12 @@ const ICONES = [
 ];
 const DIAS_LABELS = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
 
-export function FormEdicaoHabito({ habito }: { habito: Habito }) {
+type Props = {
+  habito: Habito;
+  especiesDesbloqueadas: string[];
+};
+
+export function FormEdicaoHabito({ habito, especiesDesbloqueadas }: Props) {
   const [nome, setNome] = useState(habito.name);
   const [icone, setIcone] = useState(habito.icon);
   const [frequencia, setFrequencia] = useState<"daily" | "custom">(
@@ -21,6 +27,7 @@ export function FormEdicaoHabito({ habito }: { habito: Habito }) {
   );
   const [diasSemana, setDiasSemana] = useState<number[]>(habito.days_of_week);
   const [lembrete, setLembrete] = useState(habito.reminder_time ?? "");
+  const [especie, setEspecie] = useState(habito.species ?? "costela-de-adao");
 
   const [erro, setErro] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -38,6 +45,7 @@ export function FormEdicaoHabito({ habito }: { habito: Habito }) {
         id: habito.id,
         name: nome,
         icon: icone,
+        species: especie,
         frequency: frequencia,
         days_of_week:
           frequencia === "custom" ? diasSemana : [0, 1, 2, 3, 4, 5, 6],
@@ -128,6 +136,21 @@ export function FormEdicaoHabito({ habito }: { habito: Habito }) {
             ))}
           </div>
         )}
+      </div>
+
+      {/* Espécie */}
+      <div className="space-y-2">
+        <Label className="text-xs uppercase tracking-wider text-stone-500">
+          espécie da planta
+        </Label>
+        <SeletorEspecie
+          especieAtual={especie}
+          especiesDesbloqueadas={especiesDesbloqueadas}
+          onSelecionar={setEspecie}
+        />
+        <p className="text-xs text-stone-500 italic">
+          desbloqueia novas espécies em /conquistas
+        </p>
       </div>
 
       {/* Lembrete */}

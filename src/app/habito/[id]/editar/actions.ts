@@ -8,6 +8,7 @@ type DadosEdicao = {
   id: string;
   name: string;
   icon: string;
+  species: string;
   frequency: "daily" | "custom";
   days_of_week: number[];
   reminder_time: string | null;
@@ -28,6 +29,7 @@ export async function editarHabito(dados: DadosEdicao) {
     .update({
       name: dados.name.trim(),
       icon: dados.icon || "🌱",
+      species: dados.species || "costela-de-adao",
       frequency: dados.frequency,
       days_of_week: dados.days_of_week,
       reminder_time: dados.reminder_time,

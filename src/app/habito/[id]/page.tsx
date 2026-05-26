@@ -13,6 +13,7 @@ import { Historico28Dias } from "@/components/historico-28-dias";
 import { AcoesHabito } from "@/components/acoes-habito";
 import { RegarBotao } from "@/components/regar-botao";
 import { PlantaGrande } from "@/components/planta-grande";
+import { ESPECIES } from "@/lib/conquistas";
 import type { Habito, Checkin } from "@/lib/types";
 
 type PageProps = {
@@ -76,6 +77,19 @@ export default async function DetalheHabitoPage({ params }: PageProps) {
         nome={estagio.nome}
         proximoEm={estagio.proximoEm}
       />
+
+      {/* Espécie atual (badge sutil) */}
+      {(() => {
+        const esp = ESPECIES.find((e) => e.id === h.species);
+        if (!esp) return null;
+        return (
+          <div className="text-center mb-4">
+            <span className="inline-flex items-center gap-1.5 bg-offwhite border border-stone-200 rounded-full px-3 py-1 text-xs text-stone-600">
+              {esp.emoji} <span className="font-medium">{esp.nome}</span>
+            </span>
+          </div>
+        );
+      })()}
 
       <hr className="border-stone-200 mb-4" />
 
