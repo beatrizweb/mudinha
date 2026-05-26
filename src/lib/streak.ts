@@ -78,3 +78,51 @@ export function formatarDataISO(d: Date): string {
   const dia = String(d.getDate()).padStart(2, "0");
   return `${ano}-${mes}-${dia}`;
 }
+
+/**
+ * Maior streak já alcançada (recorde histórico).
+ */
+export function calcularMaiorStreak(datasISO: string[]): number {
+  if (datasISO.length === 0) return 0;
+
+  const datas = Array.from(new Set(datasISO))
+    .map(parseDataLocal)
+    .sort((a, b) => a.getTime() - b.getTime()); // ascendente
+
+  let maior = 1;
+  let atual = 1;
+
+  for (let i = 1; i < datas.length; i++) {
+    const diff = diasEntre(datas[i - 1], datas[i]);
+    if (diff === 1) {
+      atual++;
+      if (atual > maior) maior = atual;
+    } else if (diff > 1) {
+      atual = 1;
+    }
+  }
+
+  return maior;
+}
+
+/**
+ * Gera os últimos N dias como array { data, regado }.
+ * Usado pro grid visual de histórico.
+ */
+export function gerarHistoricoUltimosNDias(
+  datasISO: string[],
+  n = 28
+): { data: string; regado: boolean }[] {
+  const setDatas = new Set(datasISO);
+  const resultado: { data: string; regado: boolean }[] = [];
+  const hoje = new Date();
+
+  for (let i = n - 1; i >= 0; i--) {
+    const d = new Date(hoje);
+    d.setDate(hoje.getDate() - i);
+    const iso = formatarDataISO(d);
+    resultado.push({ data: iso, regado: setDatas.has(iso) });
+  }
+
+  return resultado;
+}
