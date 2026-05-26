@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <main className="flex flex-col flex-1 items-center justify-center bg-areia px-6 py-16">
@@ -19,13 +21,18 @@ export default function Home() {
         </p>
 
         {/* CTA principal */}
-        <button className="w-full bg-costela text-white rounded-full py-4 font-medium text-base mb-3 hover:bg-costela/90 transition-colors">
+        <Link
+          href="/cadastro"
+          className="block w-full bg-costela text-white rounded-full py-4 font-medium text-base mb-3 hover:bg-costela/90 transition-colors text-center"
+        >
           plantar minha 1ª 🌱
-        </button>
+        </Link>
 
         <p className="text-center text-sm text-stone-500 mb-12">
           já tem conta?{" "}
-          <a className="text-costela underline cursor-pointer">entrar</a>
+          <Link href="/login" className="text-costela underline">
+            entrar
+          </Link>
         </p>
 
         {/* 3 motivos */}
