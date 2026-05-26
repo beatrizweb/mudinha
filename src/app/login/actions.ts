@@ -46,7 +46,8 @@ export async function cadastrar(formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  redirect("/jardim");
+  // Primeira vez: passa pelo onboarding pra plantar a 1ª mudinha guiada
+  redirect("/onboarding");
 }
 
 export async function sair() {
