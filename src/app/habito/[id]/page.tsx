@@ -54,6 +54,12 @@ export default async function DetalheHabitoPage({ params }: PageProps) {
         <Link href="/jardim" className="text-costela text-sm">
           ← {h.icon} {h.name}
         </Link>
+        <Link
+          href={`/habito/${h.id}/editar`}
+          className="text-stone-500 hover:text-costela text-sm"
+        >
+          editar
+        </Link>
       </header>
 
       {h.paused && (
