@@ -12,6 +12,7 @@ import { estagioPorStreak, progressoNoEstagio } from "@/lib/plantas";
 import { Historico28Dias } from "@/components/historico-28-dias";
 import { AcoesHabito } from "@/components/acoes-habito";
 import { RegarBotao } from "@/components/regar-botao";
+import { PlantaGrande } from "@/components/planta-grande";
 import type { Habito, Checkin } from "@/lib/types";
 
 type PageProps = {
@@ -68,21 +69,13 @@ export default async function DetalheHabitoPage({ params }: PageProps) {
         </div>
       )}
 
-      {/* Planta grande */}
-      <div className="text-center py-6 mb-2">
-        <div className="text-8xl mb-3">{estagio.emoji}</div>
-        <div className="w-32 mx-auto bg-stone-200 rounded-full h-2 overflow-hidden">
-          <div
-            className="bg-brote h-full transition-all duration-700"
-            style={{ width: `${progresso}%` }}
-          />
-        </div>
-        <p className="font-serif text-sm text-stone-600 mt-2 italic">
-          {estagio.nome}
-          {estagio.proximoEm !== null &&
-            ` · faltam ${estagio.proximoEm}d pro próximo estágio`}
-        </p>
-      </div>
+      {/* Planta grande animada */}
+      <PlantaGrande
+        emoji={estagio.emoji}
+        progresso={progresso}
+        nome={estagio.nome}
+        proximoEm={estagio.proximoEm}
+      />
 
       <hr className="border-stone-200 mb-4" />
 

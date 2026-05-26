@@ -77,7 +77,7 @@ export default async function JardimPage() {
             pra hoje ({habitosArr.length})
           </p>
           <div className="space-y-3 mb-6">
-            {habitosComStats.map(({ habito, streak, regouHoje, estagio, progresso }) => (
+            {habitosComStats.map(({ habito, streak, regouHoje, estagio, progresso }, index) => (
               <CardHabito
                 key={habito.id}
                 habito={habito}
@@ -85,6 +85,7 @@ export default async function JardimPage() {
                 regouHoje={regouHoje}
                 estagio={estagio}
                 progresso={progresso}
+                index={index}
               />
             ))}
           </div>
