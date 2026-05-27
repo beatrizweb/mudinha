@@ -9,6 +9,7 @@ import {
   verificarEspecies,
 } from "@/lib/conquistas";
 import type { Habito, Checkin } from "@/lib/types";
+import { ToggleNotificacoes } from "@/components/toggle-notificacoes";
 
 export default async function PerfilPage() {
   const supabase = await createClient();
@@ -102,10 +103,7 @@ export default async function PerfilPage() {
           <span className="text-sm">🌙 modo escuro</span>
           <span className="text-xs italic text-stone-500">em breve</span>
         </div>
-        <div className="flex justify-between items-center opacity-50">
-          <span className="text-sm">🔔 notificações</span>
-          <span className="text-xs italic text-stone-500">em breve</span>
-        </div>
+        <ToggleNotificacoes />
       </div>
 
       <hr className="border-stone-200 mb-5" />

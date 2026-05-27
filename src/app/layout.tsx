@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Fraunces, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -19,6 +19,15 @@ export const metadata: Metadata = {
   title: "Mudinha — plante hábitos, colha sequências",
   description:
     "O app brasileiro de hábitos onde você não falha — só esquece de regar.",
+  manifest: "/manifest.json",
+  icons: {
+    icon: "/icon.svg",
+    apple: "/icon.svg",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#2D5F3F",
 };
 
 export default function RootLayout({
